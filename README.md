@@ -1,0 +1,2 @@
+# S-CSPC315-BCS32
+ALGORITHMS AND COMPLEXITY 241007 - Midterm Technical Assessment
