@@ -1,42 +1,51 @@
-// Problem 1: Mathematical Foundations
 #include <iostream>
 #include <cmath>
 #include <vector>
 using namespace std;
 
-double distance(const vector < pair < int, int >> & points) {
-    double dist = 0.0;
-    for (int i = 0; i < points.size() - 1; ++i){
-        double x = points[i + 1].first - points[i].first;
-        double y = points[i + 1].second - points[i].second;
-        dist += sqrt(x * x + y * y);
-    }
-    return dist;
+// This function calculates the distance between two points
+double calculateDistance(pair <int, int> p1, pair <int, int> p2){
+	double x = p2.first - p1.first;
+	double y = p2.second - p1.second;
+	return sqrt(x * x + y * y);
 }
 
-int SumOfNaturalNumbers(int N){
-    return N * (N + 1) / 2;
+// This function calculates the total distance for a sequence of points
+double totalDistance(const vector < pair < int, int >> & points){
+	double total_dist = 0.0;
+	for (int i = 0; i < points.size() - 1; ++i){
+		total_dist += calculateDistance(points[i], points[i + 1]);
+	}
+	return total_dist;
+}
+
+// This function calculates the sum of the first N natural numbers
+int sumOfNaturalNumbers(int N){
+	return (N * (N + 1)) / 2;
 }
 
 int main(){
-    int N;
-    cout << "Enter the number of delivery inputs: ";
-    cin >> N;
+	// Number of points
+	int N;
+	cout << "Enter the number of delivery points: ";
+	cin >> N;
 
-    vector < pair < int, int >> points (N);
-    for (int i = 0; i < N; ++i){
-        cout << "Enter the coordinate (x) for point " << i + 1 << ": ";
-        cin >> points[i].first;
-        cout << "Enter the coordinate (y) for point " << i + 1 << ": ";
-        cin >> points[i].second;
+	vector < pair < int, int >> points(N);
 
-        // In here we display the points in (x y)
-        cout << "Point " << i + 1 << " = (" << points[i].first << ", " << points[i].second << ") \n" << endl;
-    }
+	// Input the delivery points
+	cout << "Enter the coordinates (x y) for each point: " << endl;
+	for (int i = 0; i < N; ++i){
+		cin >> points[i].first >> points[i].second;
+		cout << "Values of x and y in point[" << (i + 1) << "]: (" << points[i].first << ", " << points[i].second << ")" << endl;
+}
 
+	// Calculate total distance
+	double total_dist = totalDistance(points);
+	cout << "\nTotal distance traveled: " << total_dist << endl;
 
-    cout << "Total distance traveled: " << distance(points) << endl;
-    cout << "Sum of the first " << N << " natural numbers " << SumOfNaturalNumbers(N) << endl;
+	// Calculate the sume of the first N natural numbers
+	int sum_N = sumOfNaturalNumbers(N);
+	cout << "Sum of the first " << N << " natural numbers: " << sum_N << endl;
 
-    return 0;
+	return 0;
 }
